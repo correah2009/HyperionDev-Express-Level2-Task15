@@ -1,12 +1,12 @@
 const express = require('express');
 const fs = require('fs'); 
 const app = express();
-const person = require('./src/person.json');
 
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
-    res.send(`Welcome ${person.name}`);
+    const data = JSON.parse(fs.readFileSync('./src/person.json'));
+    res.send(`Welcome ${data.name}`);
 });
 
 app.get('*', function(req, res, next) {
